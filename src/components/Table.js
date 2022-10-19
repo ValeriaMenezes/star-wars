@@ -2,9 +2,16 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 
 function Table() {
-  const { data } = useContext(Context);
+  const { data, handleInputChange, inputFilter } = useContext(Context);
   return (
     <div>
+      <label htmlFor="name-filter">
+        <input
+          data-testid="name-filter"
+          name="name-filter"
+          onChange={ handleInputChange }
+        />
+      </label>
       <table>
         <thead>
           <tr>
@@ -25,43 +32,46 @@ function Table() {
         </thead>
         <tbody>
           {
-            data.map((
-              {
-                name,
-                rotation_period: rotation,
-                orbital_period: orbital,
-                diameter,
-                climate,
-                gravity,
-                terrain,
-                surface_water: water,
-                population,
-                films,
-                created,
-                edited,
-                url,
-              },
-            ) => (
-              <tr key={ name }>
-                <td>{ name }</td>
-                <td>{ rotation }</td>
-                <td>{ orbital }</td>
-                <td>{ diameter }</td>
-                <td>{ climate }</td>
-                <td>{ gravity }</td>
-                <td>{ terrain }</td>
-                <td>{ water }</td>
-                <td>{ population }</td>
-                <td>
-                  {
-                    films.map((i) => <p key={ i }>{i}</p>)
-                  }
-                </td>
-                <td>{ created }</td>
-                <td>{ edited }</td>
-                <td>{ url }</td>
-              </tr>
-            ))
+            data
+              .filter(({ name }) => name.toLowerCase()
+                .includes(inputFilter.toLowerCase()))
+              .map((
+                {
+                  name,
+                  rotation_period: rotation,
+                  orbital_period: orbital,
+                  diameter,
+                  climate,
+                  gravity,
+                  terrain,
+                  surface_water: water,
+                  population,
+                  films,
+                  created,
+                  edited,
+                  url,
+                },
+              ) => (
+                <tr key={ name }>
+                  <td>{ name }</td>
+                  <td>{ rotation }</td>
+                  <td>{ orbital }</td>
+                  <td>{ diameter }</td>
+                  <td>{ climate }</td>
+                  <td>{ gravity }</td>
+                  <td>{ terrain }</td>
+                  <td>{ water }</td>
+                  <td>{ population }</td>
+                  <td>
+                    {
+                      films.map((i) => <p key={ i }>{i}</p>)
+                    }
+                  </td>
+                  <td>{ created }</td>
+                  <td>{ edited }</td>
+                  <td>{ url }</td>
+                </tr>
+              ))
           }
         </tbody>
       </table>

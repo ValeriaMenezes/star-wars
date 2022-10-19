@@ -4,7 +4,9 @@ import Context from './Context';
 
 function Provider({ children }) {
   const [data, setData] = useState([]);
+  const [inputFilter, setInputFIlter] = useState('');
 
+  // -----------------Requisito1-------------------
   useEffect(() => {
     // delete retorna boolean, é necessário retornar o item
     const fetchData = async () => {
@@ -22,9 +24,18 @@ function Provider({ children }) {
     fetchData();
   }, []);
 
+  // -----------------Requisito2--------------------
+
+  const handleInputChange = ({ target }) => {
+    const { value } = target;
+    setInputFIlter(value);
+  };
+
   const contextState = useMemo(() => ({
     data,
-  }), [data]);
+    inputFilter,
+    handleInputChange,
+  }), [data, inputFilter]);
 
   return (
     <Context.Provider value={ contextState }>
