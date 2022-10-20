@@ -2,7 +2,18 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 
 function Table() {
-  const { data, handleInputChange, inputFilter } = useContext(Context);
+  const {
+    data,
+    inputFilter,
+    // inputColumn,
+    // inputComparison,
+    inputValue,
+    handleInputChange,
+    handleInputColumn,
+    handleInputComparison,
+    handleInputValue,
+    handleClickFilter,
+  } = useContext(Context);
   return (
     <div>
       <label htmlFor="name-filter">
@@ -12,6 +23,42 @@ function Table() {
           onChange={ handleInputChange }
         />
       </label>
+      <select
+        data-testid="column-filter"
+        name="inputColumn"
+        onChange={ handleInputColumn }
+      >
+        <option>population</option>
+        <option>orbital_period</option>
+        <option>diameter</option>
+        <option>rotation_period</option>
+        <option>surface_water</option>
+      </select>
+      <select
+        data-testid="comparison-filter"
+        name="inputComparison"
+        onChange={ handleInputComparison }
+      >
+        <option>maior que</option>
+        <option>menor que</option>
+        <option>igual a</option>
+      </select>
+      <input
+        type="number"
+        value={ inputValue }
+        name="inputValue"
+        data-testid="value-filter"
+        onChange={ handleInputValue }
+      />
+      <button
+        type="button"
+        data-testid="button-filter"
+        name="inputValue"
+        // value={ inputValue }
+        onClick={ handleClickFilter }
+      >
+        Filtrar
+      </button>
       <table>
         <thead>
           <tr>

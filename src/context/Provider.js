@@ -4,7 +4,10 @@ import Context from './Context';
 
 function Provider({ children }) {
   const [data, setData] = useState([]);
-  const [inputFilter, setInputFIlter] = useState('');
+  const [inputFilter, setInputFilter] = useState('');
+  const [inputColumn, setInputColumn] = useState('population');
+  const [inputComparison, setInputComparison] = useState('maior que');
+  const [inputValue, setInputValue] = useState(0);
 
   // -----------------Requisito1-------------------
   useEffect(() => {
@@ -28,14 +31,49 @@ function Provider({ children }) {
 
   const handleInputChange = ({ target }) => {
     const { value } = target;
-    setInputFIlter(value);
+    setInputFilter(value);
+  };
+
+  // -----------------Requisito3--------------------
+
+  const handleInputColumn = ({ target }) => {
+    const { value } = target;
+    setInputColumn(value);
+  };
+
+  const handleInputComparison = ({ target }) => {
+    const { value } = target;
+    setInputComparison(value);
+  };
+
+  const handleInputValue = ({ target }) => {
+    const { value } = target;
+    setInputValue(value);
+  };
+
+  const handleClickFilter = () => {
+    const skywalker = data.filter((i) => {
+      switch (inputComparison) {
+      case 'maior que': return Number(i[inputColumn]) > Number(inputValue);
+      case 'menor que': return Number(i[inputColumn]) < Number(inputValue);
+      default: return Number(i[inputColumn]) === Number(inputValue);
+      }
+    });
+    setData(skywalker);
   };
 
   const contextState = useMemo(() => ({
     data,
     inputFilter,
+    inputColumn,
+    inputComparison,
+    inputValue,
     handleInputChange,
-  }), [data, inputFilter]);
+    handleInputColumn,
+    handleInputComparison,
+    handleInputValue,
+    handleClickFilter,
+  }), [data, inputFilter, inputColumn, inputComparison, inputValue]);
 
   return (
     <Context.Provider value={ contextState }>
