@@ -8,6 +8,13 @@ function Provider({ children }) {
   const [inputColumn, setInputColumn] = useState('population');
   const [inputComparison, setInputComparison] = useState('maior que');
   const [inputValue, setInputValue] = useState(0);
+  const [options, setOptions] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
   // -----------------Requisito1-------------------
   useEffect(() => {
@@ -60,6 +67,11 @@ function Provider({ children }) {
       }
     });
     setData(skywalker);
+
+    const optionsFilter = options.filter((e) => e !== inputColumn);
+    // console.log(optionsFilter);
+    setOptions(optionsFilter);
+    setInputColumn(optionsFilter[0]);
   };
 
   const contextState = useMemo(() => ({
@@ -68,6 +80,7 @@ function Provider({ children }) {
     inputColumn,
     inputComparison,
     inputValue,
+    options,
     handleInputChange,
     handleInputColumn,
     handleInputComparison,

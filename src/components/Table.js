@@ -7,6 +7,7 @@ function Table() {
     inputFilter,
     // inputColumn,
     // inputComparison,
+    options,
     inputValue,
     handleInputChange,
     handleInputColumn,
@@ -14,6 +15,7 @@ function Table() {
     handleInputValue,
     handleClickFilter,
   } = useContext(Context);
+
   return (
     <div>
       <label htmlFor="name-filter">
@@ -28,11 +30,11 @@ function Table() {
         name="inputColumn"
         onChange={ handleInputColumn }
       >
-        <option>population</option>
-        <option>orbital_period</option>
-        <option>diameter</option>
-        <option>rotation_period</option>
-        <option>surface_water</option>
+        {
+          options.map((i) => (
+            <option key={ i }>{i}</option>
+          ))
+        }
       </select>
       <select
         data-testid="comparison-filter"
