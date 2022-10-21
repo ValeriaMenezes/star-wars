@@ -15,6 +15,7 @@ function Provider({ children }) {
     'rotation_period',
     'surface_water',
   ]);
+  // const [filters, setFilters] = useState([]);
 
   // -----------------Requisito1-------------------
   useEffect(() => {
@@ -58,6 +59,8 @@ function Provider({ children }) {
     setInputValue(value);
   };
 
+  // -----------------Requisito6--------------------
+
   const handleClickFilter = () => {
     const skywalker = data.filter((i) => {
       switch (inputComparison) {
@@ -69,10 +72,11 @@ function Provider({ children }) {
     setData(skywalker);
 
     const optionsFilter = options.filter((e) => e !== inputColumn);
-    // console.log(optionsFilter);
     setOptions(optionsFilter);
     setInputColumn(optionsFilter[0]);
   };
+
+  // -----------------Requisito7--------------------
 
   const contextState = useMemo(() => ({
     data,
@@ -86,7 +90,7 @@ function Provider({ children }) {
     handleInputComparison,
     handleInputValue,
     handleClickFilter,
-  }), [data, inputFilter, inputColumn, inputComparison, inputValue]);
+  }), [data, inputFilter, inputColumn, inputComparison, inputValue, options]);
 
   return (
     <Context.Provider value={ contextState }>

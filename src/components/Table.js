@@ -1,66 +1,16 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
+import Filters from './Filters';
 
 function Table() {
   const {
     data,
     inputFilter,
-    // inputColumn,
-    // inputComparison,
-    options,
-    inputValue,
-    handleInputChange,
-    handleInputColumn,
-    handleInputComparison,
-    handleInputValue,
-    handleClickFilter,
   } = useContext(Context);
 
   return (
     <div>
-      <label htmlFor="name-filter">
-        <input
-          data-testid="name-filter"
-          name="name-filter"
-          onChange={ handleInputChange }
-        />
-      </label>
-      <select
-        data-testid="column-filter"
-        name="inputColumn"
-        onChange={ handleInputColumn }
-      >
-        {
-          options.map((i) => (
-            <option key={ i }>{i}</option>
-          ))
-        }
-      </select>
-      <select
-        data-testid="comparison-filter"
-        name="inputComparison"
-        onChange={ handleInputComparison }
-      >
-        <option>maior que</option>
-        <option>menor que</option>
-        <option>igual a</option>
-      </select>
-      <input
-        type="number"
-        value={ inputValue }
-        name="inputValue"
-        data-testid="value-filter"
-        onChange={ handleInputValue }
-      />
-      <button
-        type="button"
-        data-testid="button-filter"
-        name="inputValue"
-        // value={ inputValue }
-        onClick={ handleClickFilter }
-      >
-        Filtrar
-      </button>
+      <Filters />
       <table>
         <thead>
           <tr>
