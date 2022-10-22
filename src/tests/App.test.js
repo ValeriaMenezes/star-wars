@@ -30,10 +30,10 @@ describe('Testando aplicação Star Wars', () => {
     expect(text).toBeDefined();
     userEvent.clear(value);
     const SETE = 7;
-    const ONZE = 11;
+    const DEZ = 10;
     waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(SETE));
     userEvent.click(removeBtn);
-    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(ONZE));
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(DEZ));
 
     const number2 = 4000;
     userEvent.selectOptions(select, ['orbital_period']);
@@ -45,8 +45,6 @@ describe('Testando aplicação Star Wars', () => {
     userEvent.clear(value);
     const DOIS = 2;
     waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(DOIS));
-    userEvent.click(removeBtn);
-    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(ONZE));
 
     const number3 = 23;
     userEvent.selectOptions(select, ['rotation_period']);
@@ -56,9 +54,13 @@ describe('Testando aplicação Star Wars', () => {
     const textThree = screen.findByRole('cell', { name: /bespin /i });
     expect(textThree).toBeDefined();
     userEvent.clear(value);
+    const UM = 1;
+    const btnEach = await screen.findAllByRole('button', { name: /remover/i });
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(UM));
+    userEvent.click(btnEach[1]);
     waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(DOIS));
-    userEvent.click(removeBtn);
-    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(ONZE));
+    userEvent.click(btnEach[0]);
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(DEZ));
 
     const number4 = 7200;
     userEvent.selectOptions(select, ['diameter']);
@@ -68,9 +70,9 @@ describe('Testando aplicação Star Wars', () => {
     const textFour = screen.findByRole('cell', { name: /hoth/i });
     expect(textFour).toBeDefined();
     userEvent.clear(value);
-    const UM = 1;
+    // const UM = 1;
     waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(UM));
     userEvent.click(removeBtn);
-    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(ONZE));
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(DEZ));
   });
 });
