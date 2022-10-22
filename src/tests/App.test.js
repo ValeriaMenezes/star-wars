@@ -1,17 +1,15 @@
-// import '@testing-library/jest-dom';
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import App from '../App';
-import mockData from './mockData';
-// import Provider from '../context/Provider';
+import testData from '../../cypress/mocks/testData';
 import renderWithContext from './renderWIth';
 
 describe('Testando aplicação Star Wars', () => {
   it('Testa chamada da API e usuabilidade', async () => {
     global.fetch = jest.fn().mockResolvedValue({
-      json: jest.fn().mockResolvedValue(mockData),
+      json: jest.fn().mockResolvedValue(testData),
     });
     await act(async () => {
       renderWithContext(<App />);
@@ -24,7 +22,6 @@ describe('Testando aplicação Star Wars', () => {
 
     const number1 = 20000;
     userEvent.selectOptions(select, ['population']);
-    // expect(screen.getByRole('option', { name: 'population' }).selected).toBe(true);
     userEvent.selectOptions(selectTwo, ['maior que']);
     userEvent.type(value, number1);
     userEvent.click(btn);

@@ -10,9 +10,15 @@ function Filters() {
     handleInputComparison,
     handleInputValue,
     handleClickFilter,
+    filters,
+    setFilters,
+    setOptions,
+    setData,
+    dataOriginal,
+    handleRemove,
+    // handleFilters,
   } = useContext(Context);
-  // const filtro = setFilters(inputValue);
-  // console.log('1', filtro);
+  console.log('1', filters);
 
   return (
     <div>
@@ -71,7 +77,7 @@ function Filters() {
           }
         </select>
       </label>
-      <label htmlFor="radio-asc">
+      {/* <label htmlFor="radio-asc">
         ASC
         <input
           data-testid="column-sort-input-asc"
@@ -90,7 +96,44 @@ function Filters() {
         data-testid="column-sort-button"
       >
         Ordenar
-      </button>
+      </button> */}
+      <div>
+        {
+          filters.map((i) => (
+            <div key={ i.column } data-testid="filter">
+              <span>{ i.column }</span>
+              {' '}
+              <span>{ i.comparison }</span>
+              {' '}
+              <span>{ i.value }</span>
+              {' '}
+              <button
+                type="button"
+                onClick={ handleRemove }
+              >
+                Remover
+              </button>
+            </div>
+          ))
+        }
+        <button
+          data-testid="button-remove-filters"
+          type="button"
+          onClick={ () => {
+            setFilters([]);
+            setOptions([
+              'population',
+              'orbital_period',
+              'diameter',
+              'rotation_period',
+              'surface_water',
+            ]);
+            setData(dataOriginal);
+          } }
+        >
+          Remover Tudo
+        </button>
+      </div>
     </div>
   );
 }
