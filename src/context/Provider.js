@@ -95,25 +95,25 @@ function Provider({ children }) {
 
   // -----------------Requisito7--------------------
 
-  const handleRemove = useCallback(({ target }) => {
-    const buscaIndex = filters.findIndex((element) => element
-      .column === target.parentElement.firstElementChild.innerText);
-    // console.log('buscaIndex', buscaIndex);
-    const wordColumn = filters[buscaIndex].column;
-    // console.log('wordColumn', wordColumn);
-    setInputColumn((prevState) => [
-      wordColumn,
-      ...prevState,
-    ]);
-    filters.splice(buscaIndex, 1);
+  const handleRemove = useCallback((i) => {
+    // const buscaIndex = filters.findIndex((element) => element
+    //   .column === target.parentElement.firstElementChild.innerText);
+    // // console.log('buscaIndex', buscaIndex);
+    // const wordColumn = filters[buscaIndex].column;
+    // // console.log('wordColumn', wordColumn);
+    // setInputColumn((prevState) => [
+    //   wordColumn,
+    //   ...prevState,
+    // ]);
+    // filters.splice(buscaIndex, 1);
 
-    // const teste = filters.filter((e) => e.column !== i.column);
-    // setOptions((prevState) => [i.column, ...prevState]);
-    // setFilters(teste);
+    const teste = filters.filter((e) => e.column !== i.column);
+    setOptions((prevState) => [i.column, ...prevState]);
+    setFilters(teste);
     // não deu certo  e então Romulo me ajudou com lógica acima
 
     const array = [];
-    const mapFilter = filters.map(({ column, comparison, value }) => {
+    const mapFilter = teste.map(({ column, comparison, value }) => {
       const filterColumn = dataOriginal.filter((e) => {
         switch (comparison) {
         case 'maior que': return Number(e[column]) > Number(value);
@@ -128,6 +128,7 @@ function Provider({ children }) {
       setData(array);
     } else {
       setData(dataOriginal);
+      setFilters([]);
     }
   });
 

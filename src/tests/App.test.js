@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import App from '../App';
@@ -19,6 +19,7 @@ describe('Testando aplicação Star Wars', () => {
     const selectTwo = screen.getByTestId('comparison-filter');
     const value = screen.getByTestId('value-filter');
     const btn = screen.getByTestId('button-filter');
+    const removeBtn = screen.getByTestId('button-remove-filters');
 
     const number1 = 20000;
     userEvent.selectOptions(select, ['population']);
@@ -27,6 +28,12 @@ describe('Testando aplicação Star Wars', () => {
     userEvent.click(btn);
     const text = screen.findByRole('cell', { name: /tatooine/i });
     expect(text).toBeDefined();
+    userEvent.clear(value);
+    const SETE = 7;
+    const ONZE = 11;
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(SETE));
+    userEvent.click(removeBtn);
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(ONZE));
 
     const number2 = 4000;
     userEvent.selectOptions(select, ['orbital_period']);
@@ -35,6 +42,11 @@ describe('Testando aplicação Star Wars', () => {
     userEvent.click(btn);
     const textTwo = screen.findByRole('cell', { name: /yavin iv/i });
     expect(textTwo).toBeDefined();
+    userEvent.clear(value);
+    const DOIS = 2;
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(DOIS));
+    userEvent.click(removeBtn);
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(ONZE));
 
     const number3 = 23;
     userEvent.selectOptions(select, ['rotation_period']);
@@ -43,6 +55,10 @@ describe('Testando aplicação Star Wars', () => {
     userEvent.click(btn);
     const textThree = screen.findByRole('cell', { name: /bespin /i });
     expect(textThree).toBeDefined();
+    userEvent.clear(value);
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(DOIS));
+    userEvent.click(removeBtn);
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(ONZE));
 
     const number4 = 7200;
     userEvent.selectOptions(select, ['diameter']);
@@ -51,5 +67,10 @@ describe('Testando aplicação Star Wars', () => {
     userEvent.click(btn);
     const textFour = screen.findByRole('cell', { name: /hoth/i });
     expect(textFour).toBeDefined();
+    userEvent.clear(value);
+    const UM = 1;
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(UM));
+    userEvent.click(removeBtn);
+    waitFor(() => expect(screen.getAllByRole('row')).toHaveLength(ONZE));
   });
 });

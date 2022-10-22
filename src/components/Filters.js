@@ -18,7 +18,7 @@ function Filters() {
     handleRemove,
     // handleFilters,
   } = useContext(Context);
-  console.log('1', filters);
+  // console.log('1', filters);
 
   return (
     <div>
@@ -109,7 +109,7 @@ function Filters() {
               {' '}
               <button
                 type="button"
-                onClick={ handleRemove }
+                onClick={ () => handleRemove(i) }
               >
                 Remover
               </button>
