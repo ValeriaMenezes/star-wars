@@ -77,26 +77,6 @@ function Filters() {
           }
         </select>
       </label>
-      {/* <label htmlFor="radio-asc">
-        ASC
-        <input
-          data-testid="column-sort-input-asc"
-          type="radio"
-        />
-      </label>
-      <label htmlFor="radio-desc">
-        DESC
-        <input
-          data-testid="column-sort-input-desc"
-          type="radio"
-        />
-      </label>
-      <button
-        type="button"
-        data-testid="column-sort-button"
-      >
-        Ordenar
-      </button> */}
       <div>
         {
           filters.map((i) => (
