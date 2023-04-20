@@ -10,12 +10,16 @@ Nesse projeto é desenvolvido uma lista com filtros de planetas do universo de S
 
 >[![JavaScript][JavaScript]][JavaScript-url]
 [![REACT][REACT]][REACT-url]
+[![RTL][RTL]][RTL-url]
 
 [JavaScript]: https://img.shields.io/badge/-JavaScript-F7DF1E?style=for-the-badge&logo=node.js&logoColor=black
 [JavaScript-url]: https://www.javascript.com
 
 [REACT]: https://img.shields.io/badge/-React.js-20232A?style=for-the-badge&logo=react
 [REACT-url]: https://legacy.reactjs.org/docs/getting-started.html
+
+[RTL]: https://img.shields.io/badge/Testing%20library-E33332?style=for-the-badge&logo=testing-library&logoColor=white
+[RTL-url]: https://testing-library.com/docs/react-testing-library/intro/
 
 ## Como Rodar
 
